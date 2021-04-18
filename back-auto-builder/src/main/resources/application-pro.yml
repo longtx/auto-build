@@ -1,0 +1,49 @@
+server:
+    port: 8021 #启动端口
+spring:
+    application:
+        name: auto-builder
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        database: mysql
+    datasource:
+        hikari:
+            driver-class-name: com.mysql.jdbc.Driver
+            username: root
+            password: 123456
+            jdbc-url: jdbc:mysql://${MYSQL_HOST:192.168.1.1}:${MYSQL_PORT:3307}/autobuilder?useUnicode=true&characterEncoding=UTF8
+# 配置swagger
+swagger:
+    enabled: true
+    base-package: com.swalikh.auto.autobuilder
+    title: autobuilder
+    version: V-1.0
+    description: com.swalikh.auto.autobuilder
+    contact:
+        name: manager
+project:
+    jenkins:
+        server-uri: http://localhost:8080    # jenkins服务的地址，端口默认8080
+        username: admin                             # jenkins账号
+        password: xxxx                        # jenkins密码
+venus:
+    url: http://localhost:8081/api-user/user-admin/login  # venus登录URL
+    username: bot
+    password: xxxx
+
+#配置日志
+logging:
+    pattern:
+        console: "[%d{yyyy-MM-dd HH:mm}]-%-5p:%m%n"
+        file: "[%d{yyyy-MM-dd HH:mm}]-%-5p:%m%n"
+    level:
+        root: info
+    file: log/auto-builder.log
+
+platform:
+    api:
+        appInfoUrl: http:/ip:32001/api-app/app-admin/app-detailed/     # venus获取APP信息URL
+        imageListUrl: http://ip:32001/api-app/app-admin/image-tag       # venus获取镜像信息URL
+        grayUpdateUrl: http://ip:32001/api-app/app-admin/gray-update    # venus灰度升级URL
